@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 // import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -15,16 +15,13 @@ class ScanKart extends StatelessWidget {
   );
 
   Future<void> scanQR() async {
-    String barcodeScanRes = "";
-
-    // try {
-    //   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-    //       '#ff6666', 'Cancel', true, ScanMode.QR);
-    // } on PlatformException {
-    //   barcodeScanRes = 'Failed to get platform version.';
-    // }
-
-    // this._scanBarcode = barcodeScanRes;
+    await Permission.camera.request();
+    String barcode = await scanner.scan();
+    if (barcode == null) {
+      print('nothing return.');
+    } else {
+      this._scanBarcode = barcode;
+    }
   }
 
   @override
@@ -39,14 +36,16 @@ class ScanKart extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return QRCodeResultBox(
-                        qrRes: _scanBarcode,
-                      );
-                    });
+                scanQR().then((value) {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        return QRCodeResultBox(
+                          qrRes: _scanBarcode,
+                        );
+                      });
+                });
               },
               child: Text('اسکن کنید'),
               style: ButtonStyle(
