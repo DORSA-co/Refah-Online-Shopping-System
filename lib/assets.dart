@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
       backgroundColor: MaterialStateProperty.resolveWith(_resolveColor),
       textStyle: MaterialStateProperty.resolveWith(_resolveTextStyle),
       fixedSize: MaterialStateProperty.resolveWith((states) => Size(184, 46)),
-      elevation: MaterialStateProperty.resolveWith((states) => 0),
+      elevation: MaterialStateProperty.resolveWith((states) => 1.5),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(7.0),
@@ -63,14 +63,14 @@ class PhoneNumberField extends StatelessWidget {
         child: TextField(
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0x05000000), width: 1.50),
-              borderRadius: BorderRadius.circular(7),
+              borderSide: BorderSide(color: Color(0x19000000), width: 0.7),
+              borderRadius: BorderRadius.circular(6),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFF58DF7C), width: 1.50),
-              borderRadius: BorderRadius.circular(7),
+              borderRadius: BorderRadius.circular(6),
             ),
-            hintText: ' 123456789',
+            hintText: '9123456789',
             hintStyle: TextStyle(
               color: Colors.grey.shade400,
               fontFamily: 'BYekan',
@@ -82,7 +82,7 @@ class PhoneNumberField extends StatelessWidget {
               fontSize: 16,
               color: Colors.grey.shade500,
             ),
-            prefixText: '09',
+            prefixText: '+98',
             prefixStyle: TextStyle(
               color: Colors.grey.shade600,
               fontFamily: 'BYekan',
@@ -101,16 +101,17 @@ class PhoneNumberField extends StatelessWidget {
           cursorRadius: Radius.circular(1),
           cursorWidth: 2,
           textDirection: TextDirection.ltr,
+          // textAlign: TextAlign.right,
           textAlignVertical: TextAlignVertical.center,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(9)
+            LengthLimitingTextInputFormatter(10)
           ],
         ),
-        elevation: 0.9,
+        elevation: 0.5,
         shape: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0x05000000), width: 0.2),
-          borderRadius: BorderRadius.circular(7),
+          borderSide: BorderSide(color: Color(0x01000000), width: 0.2),
+          borderRadius: BorderRadius.circular(6),
         ),
         type: MaterialType.canvas,
         shadowColor: Colors.grey.shade600,
